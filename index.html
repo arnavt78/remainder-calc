@@ -30,7 +30,7 @@
       <span class="input-group-text" id="basic-addon1">Divident:</span>
       <input type="text" class="divident form-control" />
     </div>
-    <div class="input-group mb-5">
+    <div class="input-group mb-4">
       <span class="input-group-text" id="basic-addon1">Divisor:</span>
       <input type="text" class="divisor form-control" />
     </div>
@@ -39,10 +39,29 @@
       <span class="input-group-text" id="basic-addon1">Quotient:</span>
       <input type="text" class="quotient form-control" readonly disabled />
     </div>
-    <div class="input-group mb-5">
+    <div class="input-group mb-4">
       <span class="input-group-text" id="basic-addon1">Remainder:</span>
       <input type="text" class="remainder form-control" readonly disabled />
     </div>
+
+    <div>
+      <button type="button" class="btn btn-success mb-3 calculate">Calculate</button>
+    </div>
+
+    <div class="form-check form-switch">
+      <input
+        class="form-check-input do-remainder"
+        type="checkbox"
+        role="switch"
+        id="doRemainder"
+        checked
+      />
+      <label class="form-check-label" for="doRemainder">Enable/disable remainder calculation</label>
+    </div>
+
+    <br />
+
+    <span class="text-danger error"></span>
 
     <script src="index.js"></script>
   </body>
