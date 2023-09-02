@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="icon" href="img/icon.png" /> -->
+    <link rel="icon" href="./icon.png" />
 
     <!-- Install Bootstrap -->
     <link
@@ -26,6 +26,7 @@
       Get the answer for a division question, including its remainder instead of a decimal!
     </p>
 
+    <!-- Input boxes for user -->
     <div class="input-group mb-2">
       <span class="input-group-text" id="basic-addon1">Divident:</span>
       <input type="text" class="divident form-control" />
@@ -35,6 +36,7 @@
       <input type="text" class="divisor form-control" />
     </div>
 
+    <!-- Output boxes -->
     <div class="input-group mb-2">
       <span class="input-group-text" id="basic-addon1">Quotient:</span>
       <input type="text" class="quotient form-control" readonly disabled />
@@ -45,9 +47,10 @@
     </div>
 
     <div>
-      <button type="button" class="btn btn-success mb-3 calculate">Calculate</button>
+      <button type="button" class="btn btn-success mb-3 calculate">Calculate!</button>
     </div>
 
+    <!-- Toggle switch for remainder calculated or not -->
     <div class="form-check form-switch">
       <input
         class="form-check-input do-remainder"
