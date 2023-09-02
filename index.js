@@ -38,7 +38,9 @@ calculate.addEventListener("click", () => {
     // 4. Get the remainder of dividing the divident and divisor together.
 
     quotient.value = Math.floor(calcNums.divident / calcNums.divisor).toFixed(0);
-    remainder.value = calcNums.divident % calcNums.divisor ?? "N/A";
+    remainder.value = Number.isNaN(calcNums.divident % calcNums.divisor)
+      ? "N/A"
+      : calcNums.divident % calcNums.divisor;
   } else if (!doRemainder.checked) {
     // Math:
     //
