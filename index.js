@@ -10,7 +10,33 @@ const remainder = document.querySelector(".remainder");
 const calculate = document.querySelector(".calculate");
 const doRemainder = document.querySelector(".do-remainder");
 
+// Theme toggle
+const themeToggle = document.querySelector(".themeToggle");
+
 const error = document.querySelector(".error");
+
+const setTheme = (theme) => {
+  document.body.setAttribute("data-bs-theme", theme);
+  themeToggle.innerText = theme === "dark" ? "Light Mode" : "Dark Mode";
+  localStorage.setItem("currentTheme", theme);
+};
+
+// Initialize theme based on stored preference or system preference
+const savedTheme = localStorage.getItem("currentTheme");
+const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+setTheme(savedTheme || (systemPrefersDark ? "dark" : "light"));
+
+// Toggle theme on button click
+themeToggle.addEventListener("click", () => {
+  const newTheme = localStorage.getItem("currentTheme") === "dark" ? "light" : "dark";
+  setTheme(newTheme);
+
+  // Prevent rapid toggling for epileptic seizures
+  themeToggle.disabled = true;
+  setTimeout(() => {
+    themeToggle.disabled = false;
+  }, 1000);
+});
 
 calculate.addEventListener("click", () => {
   error.innerHTML = "";
