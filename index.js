@@ -37,12 +37,12 @@ const handleCalculate = (e) => {
     const divsValue = Number(divisor.value);
 
     if (!divident.value || !divisor.value) {
-      error.innerHTML = "Error: At least one value is empty.";
+      error.innerText = "Error: At least one value is empty.";
       return;
     }
 
     if (isNaN(divValue) || isNaN(divsValue)) {
-      error.innerHTML = "Error: At least one value has invalid characters.";
+      error.innerText = "Error: At least one value has invalid characters.";
       return;
     }
 
