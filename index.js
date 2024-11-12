@@ -1,3 +1,6 @@
+// Theme toggle
+const themeToggle = document.querySelector(".themeToggle");
+
 // User inputs
 const divident = document.querySelector(".divident");
 const divisor = document.querySelector(".divisor");
@@ -10,15 +13,49 @@ const remainder = document.querySelector(".remainder");
 const calculate = document.querySelector(".calculate");
 const doRemainder = document.querySelector(".do-remainder");
 
-// Theme toggle
-const themeToggle = document.querySelector(".themeToggle");
-
 const error = document.querySelector(".error");
 
+/**
+ * Set the theme of the webpage.
+ *
+ * @param {string} theme Either `dark` or `light`; it cannot be set to anything else.
+ */
 const setTheme = (theme) => {
   document.body.setAttribute("data-bs-theme", theme);
   themeToggle.innerText = theme === "dark" ? "Light Mode" : "Dark Mode";
   localStorage.setItem("currentTheme", theme);
+};
+
+/**
+ * Calculate divison question entered.
+ */
+const handleCalculate = (e) => {
+  if (e.type === "click" || (e.type === "keydown" && e.key === "Enter")) {
+    error.innerHTML = "";
+
+    const divValue = Number(divident.value);
+    const divsValue = Number(divisor.value);
+
+    if (!divident.value || !divisor.value) {
+      error.innerHTML = "Error: At least one value is empty.";
+      return;
+    }
+
+    if (isNaN(divValue) || isNaN(divsValue)) {
+      error.innerHTML = "Error: At least one value has invalid characters.";
+      return;
+    }
+
+    quotient.value = (
+      doRemainder.checked ? Math.floor(divValue / divsValue) : (divValue / divsValue).toFixed(10)
+    ).toString();
+
+    remainder.value = doRemainder.checked
+      ? divValue === divsValue
+        ? 0
+        : divValue % divsValue
+      : "N/A";
+  }
 };
 
 // Initialize theme based on stored preference or system preference
@@ -38,43 +75,6 @@ themeToggle.addEventListener("click", () => {
   }, 1000);
 });
 
-calculate.addEventListener("click", () => {
-  error.innerHTML = "";
-
-  if (divident.value === "" || divisor.value === "") {
-    error.innerHTML = "Make sure to enter something in the divident and divisor boxes!";
-    return;
-  }
-
-  const calcNums = { divident: Number(divident.value), divisor: Number(divisor.value) };
-  // If the divident or divisor are not a number
-  if (Number.isNaN(calcNums.divident) || Number.isNaN(calcNums.divisor)) {
-    error.innerHTML =
-      "Make sure neither the divident nor the divisor has a special character or a letter!";
-    return;
-  }
-
-  if (doRemainder.checked) {
-    // Math:
-    //
-    // 1. Divide the divident and divisor like a regular division question.
-    // 2. Round to the lowest whole number (e.g. 4.5 = 4).
-    // 3. Remove all decimals points as they are not needed because of the remainder.
-    //
-    // 4. Get the remainder of dividing the divident and divisor together.
-
-    quotient.value = Math.floor(calcNums.divident / calcNums.divisor).toFixed(0);
-    remainder.value = Number.isNaN(calcNums.divident % calcNums.divisor)
-      ? "N/A"
-      : calcNums.divident % calcNums.divisor;
-  } else if (!doRemainder.checked) {
-    // Math:
-    //
-    // 1. Divide the divident and divisor like a regular division question.
-    // 2. Show 10 decimal points, even if they are zero.
-    // 3. Convert to string, getting rid of unnecessary zeros.
-
-    quotient.value = Number((calcNums.divident / calcNums.divisor).toFixed(10)).toString();
-    remainder.value = "N/A";
-  }
-});
+// Event listener for "Calculate" button click or Enter key press
+document.addEventListener("keydown", handleCalculate);
+calculate.addEventListener("click", handleCalculate);
