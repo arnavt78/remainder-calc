@@ -47,7 +47,9 @@ const handleCalculate = (e) => {
     }
 
     quotient.value = (
-      doRemainder.checked ? Math.floor(divValue / divsValue) : (divValue / divsValue).toFixed(10)
+      doRemainder.checked
+        ? Math.floor(divValue / divsValue)
+        : (divValue / divsValue).toString().replace(/\.?0+$/, "")
     ).toString();
 
     remainder.value = doRemainder.checked
